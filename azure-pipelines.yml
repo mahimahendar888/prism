@@ -4,6 +4,9 @@
     command: 'build'
     projects: 'pipelines.yml'
 - task: DotNetCoreCLI@2
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
   inputs:
     command: 'build'
     arguments: 'agentjob1'
