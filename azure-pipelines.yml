@@ -1,28 +1,16 @@
-# ASP.NET Core
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'build'
-    projects: 'pipelines.yml'
-- task: DotNetCoreCLI@2
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'build'
-  inputs:
-    command: 'build'
-    arguments: 'agentjob1'
-# Build and test ASP.NET Core projects targeting .NET Core.
-# Add steps that run tests, create a NuGet package, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
-
 trigger:
-- master
+- main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'Ubuntu-16.04'
 
 variables:
-  buildConfiguration: 'Release'
+  imageName: 'pipelines-javascript-docker'
 
 steps:
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+- task: Docker@2
+  displayName: Build an image
+  inputs:
+    repository: $(imageName)
+    command: build
+    Dockerfile: app/Dockerfile
